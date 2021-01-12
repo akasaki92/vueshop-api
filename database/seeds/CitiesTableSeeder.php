@@ -11,7 +11,7 @@ class CitiesTableSeeder extends Seeder
      */
     public function run()
     {
-        $url_city = "https://api.rajaongkir.com/starter/city?key=YOUR_RAJA_ONGKIR_API_KEY";
+        $url_city = "https://api.rajaongkir.com/starter/city?key=95ee1115f2c600bc4e55bed11f9622fd";
         $json_str = file_get_contents($url_city);
         $json_obj = json_decode($json_str);
         $cities = [];
