@@ -83,7 +83,7 @@ class ShopController extends Controller
 
         return response()->json([
             'status' => 'success',
-            'message' => 'courier',
+            'message' => 'couriers',
             'data' => $couriers
         ], 200);
     }
@@ -91,7 +91,7 @@ class ShopController extends Controller
     protected function getServices($data)
     {
         $url_cost = "https://api.rajaongkir.com/starter/cost";
-        $key="YOUR_RAJA_ONGKIR_API_KEY";
+        $key="95ee1115f2c600bc4e55bed11f9622fd";
         $postdata = http_build_query($data);
         $curl = curl_init();
         curl_setopt_array($curl, [
@@ -119,6 +119,7 @@ class ShopController extends Controller
 
     protected function validateCart($carts)
     {
+        // variabel untuk menampung data cart yang aman
         $safe_carts = [];
         $total = [
             'quantity_before' => 0,
@@ -127,25 +128,33 @@ class ShopController extends Controller
             'weight'    => 0,
         ];
         $idx = 0;
+        // looping data state carts yang dikirim ke server untuk memastikan data valid
         foreach($carts as $cart){
             $id = (int)$cart['id'];
             $quantity = (int)$cart['quantity'];
             $total['quantity_before'] += $quantity;
-            $book = Book::find($id);
+            // ambil data buku berdasarkan id-nya
+            $book = Book::find($id); 
             if($book){
-                if($book->stock>0){
+                // check real stock
+                if($book->stock>0){ 
                     $safe_carts[$idx]['id'] = $book->id;  
                     $safe_carts[$idx]['title'] = $book->title;  
                     $safe_carts[$idx]['cover'] = $book->cover;  
                     $safe_carts[$idx]['price'] = $book->price;  
-                    $safe_carts[$idx]['weight'] = $book->weight;  
-                    if($book->stock < $quantity){
+                    $safe_carts[$idx]['weight'] = $book->weight;                      
+                    // jika jumlah yang di pesan melebihi stock buku
+                    if($book->stock < $quantity){ 
+                        // jumlah yang dipesan disamakan
                         $quantity = (int) $book->stock;
                     }
                     $safe_carts[$idx]['quantity'] = $quantity;
 
+                    // total jumlah yg dipesan di hitung kembali
                     $total['quantity']  += $quantity;
+                    // total price dihitung kembali
                     $total['price']     += $book->price * $quantity;
+                    // total berat dihitung kembali
                     $total['weight']    += $book->weight * $quantity;
                     $idx++;
                 }
