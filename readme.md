@@ -1,11 +1,9 @@
-# Larashop-api
-
-Demo [https://api.vueshop.id](https://api.vueshop.id)
+# Vueshop-api
 
 ## Overview
-Larashop API adalah restful web service untuk aplikasi toko online berbasis mobile web [https://vueshop.id](https://vueshop.id) yang dibangun dengan menggunakan framework PHP [Laravel](https://laravel.com).
+Vueshop API adalah restful web service untuk aplikasi toko online berbasis mobile web yang dibangun dengan menggunakan framework PHP [Laravel](https://laravel.com).
 
-Larashop API merupakan bagian dari projek studi kasus pada buku ["Be Fullstack Developer"](http://buku-laravel-vue.com)
+Vueshop API merupakan bagian dari projek studi kasus pada buku ["Be Fullstack Developer"](http://buku-laravel-vue.com)
 
 [![be fullstack developer](banner.png)](http://buku-laravel-vue.com)
 
